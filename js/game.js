@@ -415,7 +415,6 @@ window.Game = (function () {
 
       this._removeGameListeners();
       window.addEventListener('keydown', this._pauseListener);
-
       this._drawPauseScreen();
     },
 
