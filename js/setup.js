@@ -11,7 +11,9 @@ var Style = {
 };
 
 var userDialog = document.querySelector('.setup');
-var similarUser = document.querySelector('.setup-similar');
+var similarUser = userDialog.querySelector('.setup-similar');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+var similarListElement = document.querySelector('.setup-similar-list');
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -30,8 +32,6 @@ var generateWizards = function (num) {
   return new Array(num).fill(null).map(makeWizard);
 };
 
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
 var renderWizard = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
@@ -42,10 +42,7 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var similarListElement = document.querySelector('.setup-similar-list');
-var wizards = generateWizards(WIZARD_AMOUNT);
-
-var addWizard = function () {
+var addWizard = function (wizards) {
   var fragment = document.createDocumentFragment();
 
   wizards.forEach(function (wizard) {
@@ -55,11 +52,10 @@ var addWizard = function () {
   similarListElement.appendChild(fragment);
 };
 
-addWizard();
-
 var showElement = function (element) {
   element.classList.remove(Style.HIDDEN);
 };
 
 showElement(userDialog);
 showElement(similarUser);
+addWizard(generateWizards(WIZARD_AMOUNT));
