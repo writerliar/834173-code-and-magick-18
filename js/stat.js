@@ -52,7 +52,9 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = Math.max.apply(null, times);
 
-  for (var i = 0; i < names.length; i++) {
+  var minArray = Math.min(names.length, times.length);
+
+  for (var i = 0; i < minArray; i++) {
     var time = Math.floor(times[i]);
     var name = names[i];
 
