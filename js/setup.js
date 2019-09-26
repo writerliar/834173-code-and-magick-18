@@ -111,64 +111,64 @@ var addWizards = function (wizards) {
   similarListElement.appendChild(fragment);
 };
 
-var onPopupEscPress = function(evt) {
-  if (evt.keyCode === ESC_KEYCODE && document.activeElement !== userNameInput){
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE && document.activeElement !== userNameInput) {
     closePopup();
   }
 };
 
-var openPopup = function(){
+var openPopup = function () {
   showElement(userDialog);
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function(){
+var closePopup = function () {
   hideElement(userDialog);
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-userDialogOpen.addEventListener('click', function(){
+userDialogOpen.addEventListener('click', function () {
   openPopup();
 });
 
-userDialogOpen.addEventListener('keydown', function(evt){
-  if(evt.keyCode === ENTER_KEYCODE){
+userDialogOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-userDialogClose.addEventListener('click', function(){
+userDialogClose.addEventListener('click', function () {
   closePopup();
 });
 
-userDialogClose.addEventListener('keydown', function(evt){
-  if(evt.keyCode === ENTER_KEYCODE){
+userDialogClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
 });
 
-userWizardCoat.addEventListener('click', function(){
+userWizardCoat.addEventListener('click', function () {
   var userCoatColor = getRandomElement(COATS_COLOR);
 
-  this.style.fill = userCoatColor;
+  userWizardCoat.style.fill = userCoatColor;
   userWizardCoatInput.value = userCoatColor;
 });
 
-userWizardEyes.addEventListener('click', function(){
+userWizardEyes.addEventListener('click', function () {
   var userEyesColor = getRandomElement(EYES_COLORS);
 
-  this.style.fill = userEyesColor;
+  userWizardEyes.style.fill = userEyesColor;
   userWizardEyesInput .value = userEyesColor;
 });
 
-userWizardFireball.addEventListener('click', function(){
+userWizardFireball.addEventListener('click', function () {
   var userFireballColor = getRandomElement(FIREBALLS_COLOR);
 
-  this.style.backgroundColor = userFireballColor;
+  userWizardFireball.style.backgroundColor = userFireballColor;
   userWizardFireballInput.value = userFireballColor;
 });
 
-userNameInput.addEventListener('invalid', function(){
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else if (userNameInput.validity.tooLong) {
