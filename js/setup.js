@@ -44,8 +44,17 @@ var FIREBALLS_COLOR = [
   '#e6e848'
 ];
 var WIZARD_AMOUNT = 4;
-var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+
+var KeyboardKey = {
+  ENTER: 'Enter',
+  ESCAPE: 'Esc',
+  ESCAPE_IE: 'Escape',
+};
+
+var ESCAPE_KEYS = [
+  KeyboardKey.ESCAPE,
+  KeyboardKey.ESCAPE_IE,
+];
 
 var Style = {
   HIDDEN: 'hidden'
@@ -111,8 +120,16 @@ var addWizards = function (wizards) {
   similarListElement.appendChild(fragment);
 };
 
+var isEscapeKey = function (evt) {
+  return ESCAPE_KEYS.indexOf(evt.key) > -1;
+};
+
+var isEnterKey = function (evt) {
+  return evt.key === KeyboardKey.ENTER;
+};
+
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && document.activeElement !== userNameInput) {
+  if (isEscapeKey(evt) && document.activeElement !== userNameInput) {
     closePopup();
   }
 };
@@ -132,7 +149,7 @@ userDialogOpen.addEventListener('click', function () {
 });
 
 userDialogOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (isEnterKey(evt)) {
     openPopup();
   }
 });
@@ -142,7 +159,7 @@ userDialogClose.addEventListener('click', function () {
 });
 
 userDialogClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYCODE) {
+  if (isEnterKey(evt)) {
     closePopup();
   }
 });
@@ -158,7 +175,7 @@ userWizardEyes.addEventListener('click', function () {
   var userEyesColor = getRandomElement(EYES_COLORS);
 
   userWizardEyes.style.fill = userEyesColor;
-  userWizardEyesInput .value = userEyesColor;
+  userWizardEyesInput.value = userEyesColor;
 });
 
 userWizardFireball.addEventListener('click', function () {
@@ -180,6 +197,6 @@ userNameInput.addEventListener('invalid', function () {
   }
 });
 
-// showElement(userDialog);
 showElement(similarUser);
 addWizards(generateWizards(WIZARD_AMOUNT));
+
