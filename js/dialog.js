@@ -1,13 +1,11 @@
 'use strict';
 
 (function () {
-  //here
-  //окно открыто, фокус не в ипуте, esc закрывает окно
-  var onPopupEscPress = function () {
-    // if (window.util.isEscapeKey && document.activeElement !== window.util.userNameInput) {
-    //   closePopup();
-    // }
-    window.util.isEscEvent(evt, closePopup);
+
+  var onPopupEscPress = function (evt) {
+    if (document.activeElement !== window.domRef.userNameInput) {
+      window.util.isEscEvent(evt, closePopup);
+    }
   };
 
   var userDialogStartCoords = {};
@@ -34,12 +32,7 @@
     openPopup();
   });
 
-  //here
-  //при нажатии enter на иконке открывается окно
-  window.domRef.userDialogOpen.addEventListener('keydown', function () {
-    // if (window.util.isEnterKey()) {
-    //   openPopup();
-    // }
+  window.domRef.userDialogOpen.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, openPopup);
   });
 
@@ -47,12 +40,7 @@
     closePopup();
   });
 
-  //here
-  //фокус на крестике, нажимаем enter, окно закрывается
-  window.domRef.userDialogClose.addEventListener('keydown', function () {
-    // if (window.util.isEnterKey()) {
-    //   closePopup();
-    // }
+  window.domRef.userDialogClose.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, closePopup);
   });
 
@@ -93,8 +81,8 @@
       document.removeEventListener('mouseup', onMouseUp);
 
       if (dragged) {
-        var onClickPreventDefault = function (evt) {
-          evt.preventDefault();
+        var onClickPreventDefault = function (evtClick) {
+          evtClick.preventDefault();
           dialogHandler.removeEventListener('click', onClickPreventDefault);
         };
         dialogHandler.addEventListener('click', onClickPreventDefault);

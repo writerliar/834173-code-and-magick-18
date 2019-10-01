@@ -11,5 +11,5 @@
       }
       input.value = newColor;
     });
-  }
+  };
 })();

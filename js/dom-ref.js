@@ -15,7 +15,7 @@
   var userWizardFireballInput = userWizardSetup.querySelector('[name="fireball-color"]');
   var userNameInput = document.querySelector('.setup-user-name');
 
-  window.domRef =  {
+  window.domRef = {
     userDialog: userDialog,
     userDialogOpen: userDialogOpen,
     userDialogClose: userDialogClose,
@@ -30,5 +30,5 @@
     userWizardFireball: userWizardFireball,
     userWizardFireballInput: userWizardFireballInput,
     userNameInput: userNameInput
-  }
+  };
 })();

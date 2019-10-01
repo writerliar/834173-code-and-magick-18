@@ -48,8 +48,6 @@
 
   var WIZARD_AMOUNT = 4;
 
-
-
   var makeWizard = function () {
     return {
       name: window.util.getRandomElement(WIZARD_NAMES),
