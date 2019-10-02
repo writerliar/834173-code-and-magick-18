@@ -22,7 +22,7 @@
     'Нионго',
     'Ирвинг'
   ];
-  var COATS_COLOR = [
+  var COAT_COLORS = [
     'rgb(101, 137, 164)',
     'rgb(241, 43, 107)',
     'rgb(146, 100, 161)',
@@ -31,14 +31,14 @@
     'rgb(215, 210, 55)',
     'rgb(0, 0, 0)'
   ];
-  var EYES_COLORS = [
+  var EYE_COLORS = [
     'black',
     'red',
     'blue',
     'yellow',
     'green'
   ];
-  var FIREBALLS_COLOR = [
+  var FIREBALL_COLORS = [
     '#ee4830',
     '#30a8ee',
     '#5ce6c0',
@@ -52,8 +52,8 @@
     return {
       name: window.util.getRandomElement(WIZARD_NAMES),
       surname: window.util.getRandomElement(WIZARD_SURNAMES),
-      coatColor: window.util.getRandomElement(COATS_COLOR),
-      eyesColor: window.util.getRandomElement(EYES_COLORS)
+      coatColor: window.util.getRandomElement(COAT_COLORS),
+      eyesColor: window.util.getRandomElement(EYE_COLORS)
     };
   };
 
@@ -81,9 +81,9 @@
     window.domRef.similarListElement.appendChild(fragment);
   };
 
-  window.colorize(window.domRef.userWizardCoat, COATS_COLOR, window.domRef.userWizardCoatInput);
-  window.colorize(window.domRef.userWizardEyes, EYES_COLORS, window.domRef.userWizardEyesInput);
-  window.colorize(window.domRef.userWizardFireball, FIREBALLS_COLOR, window.domRef.userWizardFireballInput);
+  window.colorize(window.domRef.userWizardCoat, COAT_COLORS, window.domRef.userWizardCoatInput);
+  window.colorize(window.domRef.userWizardEyes, EYE_COLORS, window.domRef.userWizardEyesInput);
+  window.colorize(window.domRef.userWizardFireball, FIREBALL_COLORS, window.domRef.userWizardFireballInput);
 
   window.domRef.userNameInput.addEventListener('invalid', function () {
     if (window.domRef.userNameInput.validity.tooShort) {

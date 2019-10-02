@@ -36,6 +36,34 @@
     element.classList.add(Style.HIDDEN);
   };
 
+  var hasMoved = function (start, end) {
+    return start.x !== end.clientX || start.y !== end.clientY;
+  };
+
+  var makeDragStart = function (onMove, onEnd) {
+    return function (evt) {
+      evt.preventDefault();
+      var start = {
+        clientX: evt.clientX,
+        clientY: evt.clientY
+      };
+
+      var onMouseMove = function (moveEvt) {
+        moveEvt.preventDefault();
+        onMove(moveEvt.movementX, moveEvt.movementY);
+      };
+
+      var onMouseUp = function (upEvt) {
+        upEvt.preventDefault();
+        document.removeEventListener('mousemove', onMouseMove);
+        return hasMoved(start, upEvt) && onEnd();
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp, {once: true});
+    }
+  };
+
   window.util = {
     isEscEvent: function (evt, action) {
       if (isEscapeKey(evt)) {
@@ -47,6 +75,7 @@
         action();
       }
     },
+    makeDragStart: makeDragStart,
     getRandomElement: getRandomElement,
     showElement: showElement,
     hideElement: hideElement,

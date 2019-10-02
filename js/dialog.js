@@ -46,51 +46,28 @@
 
   var dialogHandler = window.domRef.userDialog.querySelector('.upload');
 
-  dialogHandler.addEventListener('mousedown', function (evt) {
-    evt.preventDefault();
+  var onClickPreventDefault = function (evtClick) {
+    evtClick.preventDefault();
+  };
 
-    var startCoords = {
-      x: evt.clientX,
-      y: evt.clientY
-    };
+  var renderDialog = function(x, y) {
+    window.domRef.userDialog.style.top = (window.domRef.userDialog.offsetTop + y) + 'px';
+    window.domRef.userDialog.style.left = (window.domRef.userDialog.offsetLeft + x) + 'px';
+  };
 
-    var dragged = false;
+  var onDialogDragMove = function (x, y) {
+    renderDialog(x, y);
+  };
 
-    var onMouseMove = function (moveEvt) {
-      moveEvt.preventDefault();
-      dragged = true;
+  var onDialogDragEnd = function () {
+    dialogHandler.addEventListener('click', onClickPreventDefault, {once: true});
+  };
 
-      var shift = {
-        x: startCoords.x - moveEvt.clientX,
-        y: startCoords.y - moveEvt.clientY
-      };
+  var onDialogDragStart = window.util.makeDragStart(
+    onDialogDragMove,
+    onDialogDragEnd
+  );
 
-      startCoords = {
-        x: moveEvt.clientX,
-        y: moveEvt.clientY
-      };
-
-      window.domRef.userDialog.style.top = (window.domRef.userDialog.offsetTop - shift.y) + 'px';
-      window.domRef.userDialog.style.left = (window.domRef.userDialog.offsetLeft - shift.x) + 'px';
-    };
-
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-
-      if (dragged) {
-        var onClickPreventDefault = function (evtClick) {
-          evtClick.preventDefault();
-          dialogHandler.removeEventListener('click', onClickPreventDefault);
-        };
-        dialogHandler.addEventListener('click', onClickPreventDefault);
-      }
-    };
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  });
+  dialogHandler.addEventListener('mousedown', onDialogDragStart);
 
 })();
